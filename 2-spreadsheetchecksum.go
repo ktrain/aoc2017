@@ -47,4 +47,25 @@ func main() {
 		checksum += max - min
 	}
 	fmt.Println("Part 1 checksum:", checksum)
+
+
+	checksum = 0
+
+	for rowNum := 0; rowNum < len(rows); rowNum++ {
+		var row []string = strings.Split(rows[rowNum], "\t")
+		for colNum := 0; colNum < len(row); colNum++ {
+			for otherIndex := colNum +1 ; otherIndex < len(row); otherIndex++ {
+				a, _ := strconv.Atoi(row[colNum])
+				b, _ := strconv.Atoi(row[otherIndex])
+				if (a > b && a % b == 0) {
+					fmt.Printf("%d divides %d\n", a, b)
+					checksum += a / b
+				} else if (b % a == 0) {
+					fmt.Printf("%d divides %d\n", b, a)
+					checksum += b / a
+				}
+			}
+		}
+	}
+	fmt.Println("Part 2 checksum:", checksum)
 }
